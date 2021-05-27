@@ -5,9 +5,11 @@ import android.os.Bundle
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.TextView
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.santanderdevweek.R
+import com.example.santanderdevweek.data.Conta
 
 class MainActivity : AppCompatActivity() {
 
@@ -19,9 +21,22 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(findViewById(R.id.toolbar))
 
         mainViewModel = ViewModelProvider(this).get(MainViewModel::class.java)
+        buscarContaCliente()
+    }
+
+    private fun buscarContaCliente() {
         mainViewModel.buscarContaCliente().observe(this, Observer {  result ->
-            Log.d("Agencia ->", result.agencia)
+            bindOnView(result)
         })
+    }
+
+    private fun bindOnView(conta : Conta) {
+        findViewById<TextView>(R.id.user).text = conta.cliente.nome
+        findViewById<TextView>(R.id.agencia).text = conta.agencia
+        findViewById<TextView>(R.id.conta_corrente).text = conta.numero
+        findViewById<TextView>(R.id.saldo_disponivel).text = conta.saldo
+        findViewById<TextView>(R.id.saldo_limite).text = conta.limite
+        findViewById<TextView>(R.id.final_do_cartao).text = conta.cartao.numeroCartao
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
