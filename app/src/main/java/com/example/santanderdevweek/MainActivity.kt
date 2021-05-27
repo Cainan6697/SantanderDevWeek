@@ -2,45 +2,30 @@ package com.example.santanderdevweek
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
+import android.view.Menu
+import android.view.MenuItem
 
 class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-//        minhaIdade()
+        setSupportActionBar(findViewById(R.id.toolbar))
     }
 
-//     Declaração de variáveis
-//     val = não pode ser mudado
-//     var = mutável
-//    var contador : int = 10;
-//    contador = 11;
-//    val contador2 : int = 12;
-//     Segurança Nula
-//    val languageName : String? = null;
-//     Condicionais
-//    var idade : int = 24;
-//    if(idade > 18) {
-//        println("Maior de idade");
-//    } else {
-//        println("Menor de idade");
-//    }
-//     Outra forma:
-//     val maiorIdade : String = if(idade > 18) {
-//         "Maior de idade"
-//     } else {
-//         "Menor de idade"
-//     }
-//     Usando when
-//    val maiorIdade : String = when {
-//        idade > 18 -> "Maior de idade"
-//        else -> "Menor de idade"
-//    }
-//     Funções
-//    fun minhaIdade() : String {
-//        return "Minha idade é 23"
-//   }
-//     Forma simplificada
-//    fun minhaIdade() : String = "Minha idade é 23"
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        val inflate = menuInflater
+        inflate.inflate(R.menu.main_menu, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.item_1 -> {
+                Log.d("CLICK", "Click no item 1")
+                true
+            } else -> super.onOptionsItemSelected(item)
+        }
+    }
 }
